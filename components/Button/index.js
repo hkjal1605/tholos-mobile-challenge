@@ -14,11 +14,11 @@ const styles = StyleSheet.create({
     elevation: 8,
     backgroundColor: colors.black[900],
     borderRadius: 40,
-    paddingVertical: 10,
+    paddingVertical: 15,
     paddingHorizontal: 12,
   },
   appButtonText: {
-    fontSize: 18,
+    fontSize: 16,
     color: colors.black[100],
     fontWeight: "bold",
     alignSelf: "center",
