@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, SafeAreaView, Alert } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  Alert,
+  StatusBar,
+} from "react-native";
 import { useRouter } from "expo-router";
-import { StatusBar } from "expo-status-bar";
 
 import Button from "../components/Button";
 
@@ -48,7 +54,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
-      <StatusBar style="light" />
+      <StatusBar barStyle="light-content" />
       <View style={styles.container}>
         <View style={styles.addressContainer}>
           <Text>Wallet Address:</Text>
