@@ -23,6 +23,7 @@ const SignTransaction = () => {
     value: "0x1234",
   };
 
+  // This function runs when the user clicks on the sign message button
   const handleSignTxn = async () => {
     try {
       const signedMessage = await walletAdapter.signTransaction(txnData);

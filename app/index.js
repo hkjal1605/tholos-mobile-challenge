@@ -18,6 +18,7 @@ export default function App() {
 
   const [address, setAddress] = useState("");
 
+  // This function runs when the user clicks on the create wallet button
   const generateAddress = async () => {
     try {
       const generatedAddress =
@@ -29,6 +30,7 @@ export default function App() {
     }
   };
 
+  // This function runs when the user clicks on the sign message button
   const handleSignMessageClick = () => {
     if (!address) {
       Alert.alert("Please create a wallet first");
@@ -38,6 +40,8 @@ export default function App() {
     navigation.push("sign-message");
   };
 
+  // This function runs every time the app is opened
+  // It checks if a private key is stored in the device, if yes, it generates the address and public key from that private key
   const checkIfAccountCreated = async () => {
     try {
       const generatedAddress =

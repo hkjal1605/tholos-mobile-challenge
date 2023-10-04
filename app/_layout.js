@@ -1,6 +1,7 @@
 import { Stack } from "expo-router";
 import colors from "../theme/colors";
 
+// Layout (following the rules of expo-router)
 export default function HomeLayout() {
   return (
     <Stack

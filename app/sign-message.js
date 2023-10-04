@@ -20,6 +20,7 @@ const SignMessage = () => {
   const [message, setMessage] = useState("");
   const [signature, setSignature] = useState("");
 
+  // This function runs when the user clicks on the sign message button
   const handleSignMessage = async () => {
     try {
       if (!message) {
@@ -30,6 +31,7 @@ const SignMessage = () => {
       const signedMessage = await walletAdapter.signMessage(message);
       setSignature(signedMessage);
 
+      // Here we verify the signature generated from the sign function and show an alert based on the result
       const signatureVerification = await walletAdapter.verifySignature(
         message,
         signedMessage

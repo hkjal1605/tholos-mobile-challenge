@@ -13,6 +13,7 @@ const WalletCreated = () => {
   const [publicKey, setPublicKey] = useState("");
   const [privateKey, setPrivateKey] = useState("");
 
+  // This function gets the private key from the storage and the public key from the walletAdapter class
   const getPrivateAndPublicKeys = async () => {
     try {
       const privateKey = await walletAdapter.getPrivateKeyFromSecureStorage();
