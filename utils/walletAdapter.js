@@ -120,6 +120,7 @@ class WalletAdapter {
 
     // Sign the message
     const signature = keyPair.ec.sign(messageHex, keyPair);
+    console.log({ signature });
     return signature.toDER("hex");
   }
 
@@ -159,12 +160,37 @@ class WalletAdapter {
   }
 
   /**
+   * The function `getVRSValuesFromSignature` generates a key pair from a private key, hashes a test
+   * message, signs the message, and then fetches the v, r, and s values from the signature.
+   * @returns an object with three properties: v, r, and s.
+   */
+  async getVRSValuesFromSignature() {
+    // Get the private key
+    const keyPair = await this.generateKeyPairFromPrivateKey();
+
+    // Hash a test message and sign it and then fetch the v, r and s values from the signature
+    const messageHex = keccak256.hex("test message");
+
+    // Sign the message
+    const signature = keyPair.ec.sign(messageHex, keyPair);
+
+    // Fetch the v, r and s values from the signature
+    const v = signature.recoveryParam;
+    const r = signature.r.toString("hex");
+    const s = signature.s.toString("hex");
+
+    return { v, r, s };
+  }
+
+  /**
    * The function signTransaction takes transaction data, encodes it, hashes it, signs the hash with a
    * private key, and returns the signature.
    * @param txnData - The `txnData` parameter is an object that contains the following properties:
    * @returns the signature of the transaction.
    */
   async signTransaction(txnData) {
+    const { v, r, s } = await this.getVRSValuesFromSignature();
+
     // RLP encode the transaction data and hash it using Keccak-256
     const rlpEncodedTxn = RLP.encode([
       txnData.nonce,
@@ -173,19 +199,12 @@ class WalletAdapter {
       txnData.to,
       txnData.value,
       txnData.input,
-      0,
-      0,
-      0,
+      v,
+      r,
+      s,
     ]);
 
-    const encodedTxnHex = keccak256.hex(rlpEncodedTxn);
-
-    // Sign the hash with the private key
-    const signature = await this.signMessage(encodedTxnHex);
-
-    // Not decoding the signature using RLP.decode as it throws an error: TextDecoder not defined
-    // (TextDecoder is not available in React Native and RLP.decode uses it)
-    return signature;
+    return rlpEncodedTxn.toString("hex");
   }
 }
 
