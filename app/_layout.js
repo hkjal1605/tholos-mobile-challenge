@@ -32,6 +32,12 @@ export default function HomeLayout() {
           title: "Sign Message",
         }}
       />
+      <Stack.Screen
+        name="sign-transaction"
+        options={{
+          title: "Sign Transaction",
+        }}
+      />
     </Stack>
   );
 }

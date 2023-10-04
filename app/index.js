@@ -59,6 +59,12 @@ export default function App() {
             <Button title="Create Wallet" onPress={generateAddress} />
           ) : null}
           <Button title="Sign Message" onPress={handleSignMessageClick} />
+          {address ? (
+            <Button
+              title="Sign Transaction"
+              onPress={() => navigation.push("/sign-transaction")}
+            />
+          ) : null}
         </View>
       </View>
     </SafeAreaView>
